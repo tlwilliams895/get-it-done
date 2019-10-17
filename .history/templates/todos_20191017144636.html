@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Megan Get's It Done!!</h1>
+<form method="POST">
+    <label>
+        New_Task:
+        <input type="text" name='task' />
+    </label>
+    <input type="submit" value='Add Task' />
+</form>
+
+<hr />
+
+{% if tasks|length == 0 %}
+<p>No tasks tracked yet! Megan, let's begin!!</p>
+{% else %}
+
+<ol>
+    {% for task in tasks %}
+    <li>{{task.name}}</li>
+    <!-- Delete tasks -->
+    <form method="POST" action="/delete-task">
+        <input type="hidden" name="task-id" value={{task.id}} />
+        <input type="submit" value="All Done!" />
+    </form>
+    {% endfor %}
+</ol>
+{% endif %}
+
+{% endblock %}

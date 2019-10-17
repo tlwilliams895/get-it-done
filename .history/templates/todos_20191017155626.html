@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>*Get*It*Done*Megan!!*</h1>
+<h1>Megan Get's It Done!!</h1>
 <form method="POST">
     <label>
         New_Task:
@@ -32,14 +32,14 @@
 
 <hr />
 
-<h2>Megan's Completed_Tasks:</h2>
+<h2>
 
-<ol>
-    {% for task in completed_tasks %}
-    <li>{{task.name}}</li>
-    {% endfor %}
-</ol>
+    <ol>
+        {% for task in completed_tasks %}
+        <li></li>
+        {% endfor %}
+    </ol>
 
-<h3>***Yayyy, Bro, You tracked your tasks!!***</h3>
+</h2>
 
 {% endblock %}

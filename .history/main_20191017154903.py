@@ -37,15 +37,8 @@ def index():
         # tasks.append(task)
 
     # Add .filter_by to output the uncompleted tasks by value and pair
-    tasks = Task.query.filter_by(completed=False).all()
-    # Displays completed tasks
-    completed_tasks = Task.query.filter_by(completed=True).all()
-    return render_template(
-        'todos.html',
-        title="Megan, Get It Done!",
-        tasks=tasks,
-        completed_tasks=completed_tasks
-    )
+    tasks = Task.query.all()
+    return render_template('todos.html', title="Megan, Get It Done!", tasks=tasks)
 
 
 @app.route('/delete-task', methods=['POST'])
