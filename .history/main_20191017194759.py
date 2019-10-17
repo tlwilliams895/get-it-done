@@ -45,32 +45,12 @@ def login():
         else:
             # Explain why login failed
             return '<h1>Major*User*ERROR!!</h1>'
-
+            
     return render_template('login.html')
 
 
 @app.route('/register'  methods=['POST', 'GET'])
 def register():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        verify = request.form['verify']
-
-        # Always validate user's data means good user found
-        # Enter code here
-
-        existing_user = User.query.filter_by(email=email).first()
-        if not existing_user:
-            new_user = User(email, password)
-            db.session.add(new_user)
-            db.session.commit()
-
-            # Remember the user
-            return redirect('/')
-        else:
-            # User better response messaging
-            return "Whoa, Duplicate User!"
-
     return render_template('register.html')
 
 
