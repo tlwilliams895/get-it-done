@@ -8,16 +8,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://get-it-done:beproductiv
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLALCHEMY(app)
 
-
-class Task(db.Model):
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120))
-
-    def __init__(self, name):
-        self.name = name
-
-
 tasks = []
 
 
@@ -31,5 +21,4 @@ def index():
     return render_template('todos.html', title="Megan Get's It Done!!", tasks=tasks)
 
 
-if __name__ == '__main__':
-    app.run()
+app.run()
