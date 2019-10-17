@@ -26,7 +26,7 @@ def login():
 
 
 @app.rout('/register')
-def register():
+def login():
     return render_template('register.html')
 
 

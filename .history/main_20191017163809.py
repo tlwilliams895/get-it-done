@@ -26,9 +26,8 @@ def login():
 
 
 @app.rout('/register')
-def register():
+def login():
     return render_template('register.html')
-
 
 # Global task list is commented out because a
 # MySQL database is being used now
