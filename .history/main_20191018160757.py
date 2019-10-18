@@ -17,7 +17,7 @@ class Task(db.Model):
     completed = db.Column(db.Boolean)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self, name, owner):
+    def __init__(self, name):
         self.name = name
         self.completed = False
         self.owner = owner

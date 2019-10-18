@@ -17,7 +17,7 @@ class Task(db.Model):
     completed = db.Column(db.Boolean)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self, name, owner):
+    def __init__(self, name):
         self.name = name
         self.completed = False
         self.owner = owner
@@ -70,7 +70,7 @@ def login():
             # Explain why login failed
             # return '<h2>*USER*ERROR*</h2>'
 
-    return render_template('login.html', message="*YOU MUST LOG-IN*")
+    return render_template('login.html', message="*Please Log In*")
 
 
 @app.route('/register', methods=['POST', 'GET'])
