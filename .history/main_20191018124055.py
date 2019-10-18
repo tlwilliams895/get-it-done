@@ -37,14 +37,11 @@ class User(db.Model):
 # Add the request types using inputs from login.html
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    # This request will login the user with proper credentials
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        # Verifies email/user and password together as a result set
         user = User.query.filter_by(email=email).first()
 
-        # Checks if user/email exists
         if user and user.password == password:
             # Remember that the user MUST be logged in
             return redirect('/')

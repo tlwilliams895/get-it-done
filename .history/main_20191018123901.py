@@ -20,15 +20,12 @@ class Task(db.Model):
         self.completed = False
 
 # User object to enter is email address and password in MyPHPadmin
-
-
 class User(db.Model):
-    # Create fields/columns for db; add more later
+
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120))
 
-    # Initializer/Constructor
     def __init__(self, email, password):
         self.email = email
         self.password = password
@@ -37,14 +34,11 @@ class User(db.Model):
 # Add the request types using inputs from login.html
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    # This request will login the user with proper credentials
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        # Verifies email/user and password together as a result set
         user = User.query.filter_by(email=email).first()
 
-        # Checks if user/email exists
         if user and user.password == password:
             # Remember that the user MUST be logged in
             return redirect('/')
