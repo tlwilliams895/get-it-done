@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{title}}</title>
+</head>
+
+<body>
+
+    <div>
+        <a href='/logout'>*Log*Out*</a>
+    </div>
+
+    <!-- Create with block here -->
+    {% with messages = get_flashed_messages() %}
+    <ul>
+        {% for messages in messages %}
+
+        {% endfor %}
+    </ul>
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+
+</html>

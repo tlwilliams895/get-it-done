@@ -64,10 +64,8 @@ def login():
             # Remember that the user MUST be logged in
             return redirect('/')
         else:
-            # Create flash message category
-            flash('*USER*ERROR* - Incorrect credentials or Non-existent User', error)
             # Explain why login failed
-            # return '<h2>*USER*ERROR*</h2>'
+            return '<h2>*USER*ERROR*</h2>'
 
     return render_template('login.html', message="*Please Log In*")
 

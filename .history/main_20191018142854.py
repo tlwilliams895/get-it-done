@@ -60,14 +60,11 @@ def login():
         if user and user.password == password:
             # Enter user/email session data to store here
             session['email'] = email
-            flash("Login Successful")
             # Remember that the user MUST be logged in
             return redirect('/')
         else:
-            # Create flash message category
-            flash('*USER*ERROR* - Incorrect credentials or Non-existent User', error)
             # Explain why login failed
-            # return '<h2>*USER*ERROR*</h2>'
+            return '<h2>*USER*ERROR*</h2>'
 
     return render_template('login.html', message="*Please Log In*")
 
@@ -100,7 +97,7 @@ def register():
 
 
 # Log-out user here/remove user email and redirect to main page
-@app.route('/logout')  # or ('/logout', methods=['GET'])
+@app.route('/logout', methods=['GET'])
 def logout():
     del session['email']
     return redirect('/')
