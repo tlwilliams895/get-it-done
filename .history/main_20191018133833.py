@@ -19,8 +19,9 @@ class Task(db.Model):
         self.name = name
         self.completed = False
 
-
 # User object to enter is email address and password in MyPHPadmin
+
+
 class User(db.Model):
     # Create fields/columns for db; add more later
     id = db.Column(db.Integer, primary_key=True)
@@ -31,15 +32,6 @@ class User(db.Model):
     def __init__(self, email, password):
         self.email = email
         self.password = password
-
-
-# .before_request - Create required login to check if user has logged-in
-@app.before_request
-def require_login():
-    allowed_routes = ['login', 'register']
-    if request.endpoint not in allowed_routes and 'email' not in session:
-        return redirect('/login')
-
 
 # Login Handlers will process requests to database
 # Add the request types using inputs from login.html
@@ -99,8 +91,10 @@ def logout():
     return redirect('/')
 
 
-# Global task list is commented out because the MySQL database is being used now
+# Global task list is commented out because a
+# MySQL database is being used now
 # tasks = []
+
 
 @app.route('/', methods=['POST', 'GET'])
 def index():

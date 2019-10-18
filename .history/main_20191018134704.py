@@ -99,8 +99,10 @@ def logout():
     return redirect('/')
 
 
-# Global task list is commented out because the MySQL database is being used now
+# Global task list is commented out because a
+# MySQL database is being used now
 # tasks = []
+
 
 @app.route('/', methods=['POST', 'GET'])
 def index():

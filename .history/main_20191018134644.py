@@ -34,7 +34,7 @@ class User(db.Model):
 
 
 # .before_request - Create required login to check if user has logged-in
-@app.before_request
+@app.before_request()
 def require_login():
     allowed_routes = ['login', 'register']
     if request.endpoint not in allowed_routes and 'email' not in session:
@@ -99,8 +99,10 @@ def logout():
     return redirect('/')
 
 
-# Global task list is commented out because the MySQL database is being used now
+# Global task list is commented out because a
+# MySQL database is being used now
 # tasks = []
+
 
 @app.route('/', methods=['POST', 'GET'])
 def index():

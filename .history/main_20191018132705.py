@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, session
+from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -19,8 +19,9 @@ class Task(db.Model):
         self.name = name
         self.completed = False
 
-
 # User object to enter is email address and password in MyPHPadmin
+
+
 class User(db.Model):
     # Create fields/columns for db; add more later
     id = db.Column(db.Integer, primary_key=True)
@@ -31,15 +32,6 @@ class User(db.Model):
     def __init__(self, email, password):
         self.email = email
         self.password = password
-
-
-# .before_request - Create required login to check if user has logged-in
-@app.before_request
-def require_login():
-    allowed_routes = ['login', 'register']
-    if request.endpoint not in allowed_routes and 'email' not in session:
-        return redirect('/login')
-
 
 # Login Handlers will process requests to database
 # Add the request types using inputs from login.html
@@ -54,13 +46,11 @@ def login():
 
         # Checks if user/email exists
         if user and user.password == password:
-            # Enter user/email session data to store here
-            session['email'] = email
             # Remember that the user MUST be logged in
             return redirect('/')
         else:
             # Explain why login failed
-            return '<h2>*USER*ERROR*</h2>'
+            return '<h1>*USER*ERROR*</h1>'
 
     return render_template('login.html')
 
@@ -80,27 +70,20 @@ def register():
             new_user = User(email, password)
             db.session.add(new_user)
             db.session.commit()
-            # User/email session data will remember that the user logged-in
-            session['email'] = email
 
             # Remember the user
             return redirect('/')
         else:
             # User better response messaging
-            return '<h2>*Whoa, Duplicate User!*</h2>'
+            return "Whoa, Duplicate User!"
 
     return render_template('register.html')
 
 
-# Log-out user here/remove user email and redirect to main page
-@app.route('/logout', methods=['GET'])
-def logout():
-    del session['email']
-    return redirect('/')
-
-
-# Global task list is commented out because the MySQL database is being used now
+# Global task list is commented out because a
+# MySQL database is being used now
 # tasks = []
+
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
