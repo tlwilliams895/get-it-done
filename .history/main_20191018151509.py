@@ -29,7 +29,6 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120))
-    tasks = db.relationship('Task', backref='owner')
 
     # Initializer/Constructor
     def __init__(self, email, password):
