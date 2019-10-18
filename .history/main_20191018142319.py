@@ -120,14 +120,13 @@ def index():
         new_task = Task(task_name, owner)
         db.session.add(new_task)
         db.session.commit()
-
         # Removed: Will used an object to create a new object in the db
         # tasks.append(task)
 
     # Add .filter_by to output the uncompleted tasks by value and pair
-    tasks = Task.query.filter_by(completed=False, owner=owner).all()
+    tasks = Task.query.filter_by(completed=False).all()
     # Displays completed tasks
-    completed_tasks = Task.query.filter_by(completed=True, owner=owner).all()
+    completed_tasks = Task.query.filter_by(completed=True).all()
     # Watch Part 4 Video:
     # remove_tasks = Task.query.filter_by(remove_tasks=True).all()
     return render_template(

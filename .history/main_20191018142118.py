@@ -111,23 +111,19 @@ def logout():
 def index():
 
     # Specify that a user has many tasks and you want SQLAlchemy to look for matches between the two
-    # Get the owner of the task so that you can pass that into the Task constructor
-    owner = User.query.filter_by(email=session['email']).first()
 
     if request.method == 'POST':
         task_name = request.form['task']
-        # Add owner
-        new_task = Task(task_name, owner)
+        new_task = Task(task_name)
         db.session.add(new_task)
         db.session.commit()
-
         # Removed: Will used an object to create a new object in the db
         # tasks.append(task)
 
     # Add .filter_by to output the uncompleted tasks by value and pair
-    tasks = Task.query.filter_by(completed=False, owner=owner).all()
+    tasks = Task.query.filter_by(completed=False).all()
     # Displays completed tasks
-    completed_tasks = Task.query.filter_by(completed=True, owner=owner).all()
+    completed_tasks = Task.query.filter_by(completed=True).all()
     # Watch Part 4 Video:
     # remove_tasks = Task.query.filter_by(remove_tasks=True).all()
     return render_template(

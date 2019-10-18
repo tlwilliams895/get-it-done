@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Create User Login data -->
+<h1>*Welcome, Let's Get It!!*</h1>
+<p>If you do not have an account, you may <a href="/register">register</a> for one here.</p>
+<form action="/login" method="POST">
+    <table>
+        <tr>
+            <td>
+                <label for="email">Enter*Valid*Email</label>
+            </td>
+            <td>
+                <input name="email" type="email" value="{{ email }}" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="password">Enter*Password</label>
+            </td>
+            <td>
+                <input name="password" type="password" />
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Let's Go!" />
+</form>
+
+{% endblock %}

@@ -36,13 +36,12 @@
 
 <ol>
     {% for task in completed_tasks %}
-    <li>{{task.name}}
-        <!-- Delete tasks -->
-        <form action="/delete-task" method="POST" style="display:inline-block;">
-            <input type="hidden" name="task-id" value="{{task.id}}" />
-            <input type="submit" value="All Done" />
-    </li>
-    {% endfor %}
+    <li>{{task.name}}</li>
+    <!-- Delete tasks -->
+    <form action="/delete-task" method="POST" style="display:inline-block;">
+        <input type="hidden" name="task-id" value="{{task.id}}" />
+        <input type="submit" value="Tracked!" />
+        {% endfor %}
 </ol>
 
 <h3>***Yayyy, Bro, You tracked your tasks!!***</h3>

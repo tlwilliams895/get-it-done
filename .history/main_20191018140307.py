@@ -15,12 +15,10 @@ class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
     completed = db.Column(db.Boolean)
-    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, name):
         self.name = name
         self.completed = False
-        self.owner = owner
 
 
 # User object to enter is email address and password in MyPHPadmin
@@ -106,28 +104,21 @@ def logout():
 # Global task list is commented out because the MySQL database is being used now
 # tasks = []
 
-
 @app.route('/', methods=['POST', 'GET'])
 def index():
 
-    # Specify that a user has many tasks and you want SQLAlchemy to look for matches between the two
-    # Get the owner of the task so that you can pass that into the Task constructor
-    owner = User.query.filter_by(email=session['email']).first()
-
     if request.method == 'POST':
         task_name = request.form['task']
-        # Add owner
-        new_task = Task(task_name, owner)
+        new_task = Task(task_name)
         db.session.add(new_task)
         db.session.commit()
-
         # Removed: Will used an object to create a new object in the db
         # tasks.append(task)
 
     # Add .filter_by to output the uncompleted tasks by value and pair
-    tasks = Task.query.filter_by(completed=False, owner=owner).all()
+    tasks = Task.query.filter_by(completed=False).all()
     # Displays completed tasks
-    completed_tasks = Task.query.filter_by(completed=True, owner=owner).all()
+    completed_tasks = Task.query.filter_by(completed=True).all()
     # Watch Part 4 Video:
     # remove_tasks = Task.query.filter_by(remove_tasks=True).all()
     return render_template(
@@ -146,11 +137,9 @@ def delete_task():
     task = Task.query.get(task_id)
     task.completed = True
     db.session.add(task)
-
     # Removed to update delete functions
-    # completed_tasks = False
-    # db.session.delete(completed_tasks)
-    # How can I delete the completed tasks to disappear in todos.html?
+    # db.session.delete(task)
+    # How can I delete the completed tasks to disappear?
     db.session.commit()
 
     return redirect('/')
