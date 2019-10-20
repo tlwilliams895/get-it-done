@@ -60,7 +60,7 @@ def login():
         user = User.query.filter_by(email=email).first()
 
         # Checks if user/email exists
-        if user and check_pw_hash(password, user.pw_hash):
+        if user and user.password == password:
             # Enter user/email session data to store here
             session['email'] = email
             flash("Login Successful")
