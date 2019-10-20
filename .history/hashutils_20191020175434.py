@@ -24,7 +24,7 @@ def make_pw_hash(password, salt=None):
 # Verifies user pw upon login
 def check_pw_hash(password, hash):
     salt = hash.split(',')[1]
-    if make_pw_hash(password, salt) == hash:
+    if make_pw_hash(password) == hash:
         return True
     # Why did he exclude the else clause?
     return False
